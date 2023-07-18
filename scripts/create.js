@@ -3,6 +3,7 @@ const { join } = require('path')
 const { TEMPLATE_DIR } = require('../util/constants')
 const { blue, red } = require('kolorist')
 const prompts = require('../util/prompts')
+const { execSync } = require('child_process')
 
 module.exports = async function(targetDirectory) {
     try {
@@ -18,6 +19,9 @@ module.exports = async function(targetDirectory) {
         cp(templateDir, root, {
             recursive: true
         }, (error) => {
+            error && console.error(red(error))
+        })
+        execSync('git init', { cwd: root }, (error) => {
             error && console.error(red(error))
         })
         console.info(blue('\n创建成功，请执行以下命令\n'))
