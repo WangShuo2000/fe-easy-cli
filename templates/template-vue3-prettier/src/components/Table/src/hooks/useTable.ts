@@ -14,7 +14,7 @@ export const useTable = (options: BaseTableProps): [(arg: any) => void, ActionTy
         if (!instance) {
             console.error('instance not be obtained!')
         }
-        return unref(instanceRef)!
+        return instance!
     }
 
     const tableMethod: ActionType = {

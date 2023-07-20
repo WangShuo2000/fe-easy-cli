@@ -11,7 +11,10 @@ export type BaseTableProps = {
     dataSource?: Recordable[]
     beforeRequest?: (params: any) => Recordable
     afterRequest?: (result: any) => void
-    rowSelection?: TableRowSelection & { showSelectedNumber?: boolean }
+    rowSelection?: TableRowSelection & { showSelectedNumber?: boolean },
+    toolSetting?: { reload: boolean },
+    actionColumn?: BaseColumns,
+    pagination?: boolean
 }
 
 export type ActionType = {
