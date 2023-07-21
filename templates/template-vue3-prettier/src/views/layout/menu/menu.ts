@@ -1,5 +1,5 @@
 import { h } from 'vue';
-import { HomeOutlined, TableOutlined, SnippetsOutlined } from '@ant-design/icons-vue';
+import { HomeOutlined, TableOutlined, SnippetsOutlined, AppstoreOutlined } from '@ant-design/icons-vue';
 import type { ItemType } from 'ant-design-vue';
 
 type MenuItemType = ItemType & {
@@ -28,4 +28,11 @@ export const menuArray: MenuItemType[] = [
         title: '弹窗',
         url: '/modal',
     },
+    {
+        key: 'Combination',
+        icon: () => h(AppstoreOutlined),
+        label: '组合组件',
+        title: '组合组件',
+        url: '/combination'
+    }
 ];

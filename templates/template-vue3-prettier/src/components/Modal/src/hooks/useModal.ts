@@ -1,29 +1,43 @@
-import { ref, unref } from "vue"
-import type { ModalAction } from "../types/modal"
+import { onUnmounted, ref } from "vue"
+import type { CallBackFn, ModalAction, ModalCommonMethod } from "../types/modal"
 
-export const useModal = (): [ register: (arg: any) => void, action: ModalAction ] => {
-    const instanceRef = ref<MayNull<ModalAction>>(null)
+export const useModal = (): [ register: (arg: any, callBack: CallBackFn) => void, action: ModalAction ] => {
+    const instanceRef = ref<MayNull<ModalCommonMethod>>(null)
 
-    const getInstance = (): ModalAction => {
-        const instance = unref(instanceRef)
-        if (!instance) {
+    const getInstance = (): ModalCommonMethod => {
+        if (!instanceRef) {
             console.error('instance not be obtained!')
         }
-        return instance!
+        return instanceRef.value!
     }
 
-    const register = (instanceAction: ModalAction) => {
+    let callBackFn: CallBackFn | null = null
+    const register = (instanceAction: ModalAction, callBack: CallBackFn) => {
         instanceRef.value = instanceAction
+        callBackFn = callBack
     }
 
-    const action = {
-        openModal() {
-            return getInstance().openModal()
+    const action: ModalAction = {
+        openModal(query) {
+            callBackFn && typeof callBackFn === 'function' && callBackFn(query)
+            getInstance().setProps({
+                open: true
+            })
         },
         closeModal() {
-            return getInstance().closeModal()
-        }
+            getInstance().setProps({
+                open: false
+            })
+        },
+        setProps(props) {
+            getInstance().setProps(props)
+        },
     }
+
+    onUnmounted(() => {
+        instanceRef.value = null
+        callBackFn = null
+    })
 
     return [
         register,

@@ -19,6 +19,11 @@ const router = createRouter({
             name: 'Modal',
             component: () => import('@/views/modal/index.vue'),
         },
+        {
+            path: '/combination',
+            name: 'Combination',
+            component: () => import('@/views/combination/index.vue')
+        }
     ],
 });
 

@@ -5,6 +5,7 @@
             <MenuFoldOutlined v-else />
         </a-button>
         <a-menu
+            class="!border-none"
             ref="menuRef"
             mode="inline"
             v-model:openKeys="menuState.openKeys"
