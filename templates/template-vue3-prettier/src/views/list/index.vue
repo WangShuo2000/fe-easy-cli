@@ -14,6 +14,10 @@
 import { BaseTable, useTable } from '@/components/Table'
 import { columns } from './data'
 
+defineOptions({
+    name: 'Table'
+})
+
 const dataSource = [...Array(100)].map((_, i) => ({
     id: i,
     key: i,
@@ -56,6 +60,7 @@ const [ register, { getSelectItems, clearSelectItems } ] = useTable({
     },
     toolSetting: {
         reload: true,
+        columns: true
     },
 })
 

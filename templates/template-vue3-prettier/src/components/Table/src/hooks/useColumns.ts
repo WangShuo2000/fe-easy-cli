@@ -18,8 +18,22 @@ export const useColumns = (props: ComputedRef<BaseTableProps>) => {
         }
         return unref(columns)
     }) as ComputedRef<BaseColumns[]>
+
+    const titleModalRef = ref<boolean>(false)
+    const getTitleModalComp = computed(() => unref(titleModalRef))
+    const showColumnSetting = () => {
+        titleModalRef.value = !titleModalRef.value
+    }
+
+    const setColumns = (columns: BaseColumns[]) => {
+        console.log(columns)
+    }
     
     return {
-        getColumnsComp
+        getColumnsComp,
+
+        showColumnSetting,
+        getTitleModalComp,
+        setColumns
     }
 }

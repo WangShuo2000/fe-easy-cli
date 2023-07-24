@@ -58,11 +58,11 @@ const setProps = (properties: BaseTableProps) => {
     }
 }
 
-const { getColumnsComp } = useColumns(computedProps as ComputedRef<BaseTableProps>)
+const { getColumnsComp, showColumnSetting, getTitleModalComp, setColumns } = useColumns(computedProps as ComputedRef<BaseTableProps>)
 const { getLoading, setLoading } = useLoading()
 const { getDataSourceComp, reload, handleTableChange, paginationComp } = useDataSource(computedProps as ComputedRef<BaseTableProps>, tableData, setLoading)
 const { getRowSelectionRef, getSelectItems, getSelectItemsKey, clearSelectItems } = useRowSelection(computedProps as ComputedRef<BaseTableProps>, tableData)
-const { TableTitleComponent } = useTitle(computedProps as ComputedRef<BaseTableProps>, slots, getSelectItemsKey, getLoading, reload)
+const { TableTitleComponent } = useTitle(computedProps as ComputedRef<BaseTableProps>, slots, getSelectItemsKey, getLoading, reload, showColumnSetting, getTitleModalComp, getColumnsComp, setColumns)
 
 const action: ActionType = {
     reload,

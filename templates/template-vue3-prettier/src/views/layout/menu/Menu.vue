@@ -1,11 +1,8 @@
 <template>
     <div :style="{ width: menuState.collapsed ? menuRef?.clientWidth : '250px' }">
-        <a-button type="primary" class="mb-16px" @click="toggleCollapsed">
-            <MenuUnfoldOutlined v-if="menuState.collapsed" />
-            <MenuFoldOutlined v-else />
-        </a-button>
+        <div class="font-semibold text-16px mt-3 mb-3 ml-2">导航栏</div>
         <a-menu
-            class="!border-none"
+            class="!border-none mt-2"
             ref="menuRef"
             mode="inline"
             v-model:openKeys="menuState.openKeys"
@@ -18,13 +15,16 @@
 
 <script lang="ts" setup>
 import { reactive, watch, ref } from 'vue';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
 import { useRoute, useRouter } from 'vue-router';
 import { menuArray } from './menu';
+import { useToggleStore } from '@/stores/toggleMenu'
 
 const menuRef = ref<HTMLElement>();
 const router = useRouter();
 const route = useRoute()
+
+const toggleMenu = useToggleStore()
+const { menuState } = toggleMenu
 
 watch(
     () => route.name,
@@ -35,12 +35,6 @@ watch(
 
 const items = reactive(menuArray);
 
-const menuState = reactive({
-    collapsed: false,
-    selectedKeys: [''],
-    openKeys: ['sub1'],
-    preOpenKeys: ['sub1'],
-});
 watch(
     () => menuState.openKeys,
     (val, oldVal) => {
@@ -56,9 +50,4 @@ watch(
         });
     }
 );
-
-const toggleCollapsed = () => {
-    menuState.collapsed = !menuState.collapsed;
-    menuState.openKeys = menuState.collapsed ? [] : menuState.preOpenKeys;
-};
 </script>

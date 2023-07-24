@@ -1,5 +1,9 @@
 <template>
-    123
+    <div>123</div>
 </template>
 
-<script></script>
+<script lang="ts" setup>
+    defineOptions({
+        name: 'Combination'
+    })
+</script>

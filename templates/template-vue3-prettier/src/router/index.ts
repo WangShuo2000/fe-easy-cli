@@ -23,6 +23,11 @@ const router = createRouter({
             path: '/combination',
             name: 'Combination',
             component: () => import('@/views/combination/index.vue')
+        },
+        {
+            path: '/notFound',
+            name: 'NotFound',
+            component: () => import('@/views/layout/404/index.vue')
         }
     ],
 });
